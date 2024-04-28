@@ -247,14 +247,14 @@ describe('Checkbox', () => {
         <Checkbox
           label="Foobar"
           true-value="a"
-          false-value={3}
+          false-value={0}
           v-model={checked.value}
         />
       ))
 
       await wrapper.trigger('click')
       await nextTick()
-      expect(checked.value).toBe(3)
+      expect(checked.value).toBe(0)
       await wrapper.trigger('click')
       await nextTick()
       expect(checked.value).toBe('a')
@@ -263,14 +263,14 @@ describe('Checkbox', () => {
     test('with label as slot content', async () => {
       const checked = ref('a')
       const wrapper = mount(() => (
-        <Checkbox true-value="a" false-value={3} v-model={checked.value}>
+        <Checkbox true-value="a" false-value={0} v-model={checked.value}>
           Foobar
         </Checkbox>
       ))
 
       await wrapper.trigger('click')
       await nextTick()
-      expect(checked.value).toBe(3)
+      expect(checked.value).toBe(0)
       await wrapper.trigger('click')
       await nextTick()
       expect(checked.value).toBe('a')
@@ -365,7 +365,7 @@ describe('check-button', () => {
   test('create', async () => {
     const checked = ref(false)
     const wrapper = mount(() => (
-      <CheckboxButton v-model={checked.value} label="a" />
+      <CheckboxButton v-model={checked.value} label="a" value="a" />
     ))
 
     expect(wrapper.classes()).toContain('el-checkbox-button')
@@ -378,7 +378,7 @@ describe('check-button', () => {
   test('disabled', async () => {
     const checked = ref(false)
     const wrapper = mount(() => (
-      <CheckboxButton v-model={checked.value} disabled label="a" />
+      <CheckboxButton v-model={checked.value} disabled label="a" value="a" />
     ))
 
     expect(wrapper.classes()).toContain('is-disabled')
@@ -507,11 +507,11 @@ describe('check-button', () => {
       setup() {
         return () => (
           <CheckboxGroup v-model={checkList.value} max={3}>
-            <CheckboxButton label="a" ref="a" />
-            <CheckboxButton label="b" ref="b" />
-            <CheckboxButton label="c" ref="c" />
-            <CheckboxButton label="d" ref="d" />
-            <CheckboxButton label="e" ref="e" />
+            <CheckboxButton label="a" value="a" ref="a" />
+            <CheckboxButton label="b" value="b" ref="b" />
+            <CheckboxButton label="c" value="c" ref="c" />
+            <CheckboxButton label="d" value="d" ref="d" />
+            <CheckboxButton label="e" value="e" ref="e" />
           </CheckboxGroup>
         )
       },
@@ -632,7 +632,7 @@ describe('check-button', () => {
     test('single checkbox group in form item, override label', async () => {
       const wrapper = mount(() => (
         <ElFormItem label="test">
-          <CheckboxGroup label="Foo">
+          <CheckboxGroup aria-label="Foo">
             <Checkbox label="Foo" value="Foo" />
             <Checkbox label="Bar" value="Bar" />
           </CheckboxGroup>
@@ -655,11 +655,11 @@ describe('check-button', () => {
         setup() {
           return () => (
             <ElFormItem label="test">
-              <CheckboxGroup label="Foo" ref="checkboxGroup1">
+              <CheckboxGroup aria-label="Foo" ref="checkboxGroup1">
                 <Checkbox label="Foo" value="Foo" />
                 <Checkbox label="Bar" value="Bar" />
               </CheckboxGroup>
-              <CheckboxGroup label="Bar" ref="checkboxGroup2">
+              <CheckboxGroup aria-label="Bar" ref="checkboxGroup2">
                 <Checkbox label="Foo" value="Foo" />
                 <Checkbox label="Bar" value="Bar" />
               </CheckboxGroup>
